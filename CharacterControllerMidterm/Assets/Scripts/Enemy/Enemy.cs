@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
         }
 
         statSystem.AddCallBack(StatType.Health, UpdateBar);
-        Debug.Log("Success!");
     }
 
     // Update is called once per frame

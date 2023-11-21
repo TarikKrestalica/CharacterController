@@ -169,10 +169,14 @@ public class Inventory : MonoBehaviour
         if (mostRecentItem.amount < 1)
         {
             items.Remove(mostRecentItem);
-            if(items.Count == 0)
+            if (items.Count == 0)
             {
                 currentlyEquippedItem = null;
-            } 
+            }
+            else
+            {
+                currentlyEquippedItem = items[items.Count - 1];
+            }
         }
 
         if (mostRecentItem.tag == "Item")  // Visual cues for items should be kept
@@ -180,7 +184,7 @@ public class Inventory : MonoBehaviour
             GameManager.playerController.itemHolder.sprite = null;
         }
 
-        currentlyEquippedItem = mostRecentItem;
+        
     }
 
     public void PopulateItemInGame(ItemDefinition itemDef)

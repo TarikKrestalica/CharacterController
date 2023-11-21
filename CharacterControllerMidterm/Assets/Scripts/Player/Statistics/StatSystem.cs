@@ -13,16 +13,15 @@ public class StatSystem : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SetUpStats());
-        StopAllCoroutines();
     }
 
     IEnumerator SetUpStats()
     {
-        foreach (Stat stat in statTypes)
+        yield return new WaitForEndOfFrame();
+        foreach (Stat stat in statTypes)  // Should be called after adding all callbacks!
         {
             SetStat(stat.statType, stat.initialValue);
         }
-        yield return null;
     }
 
     public void LowerStat(StatType statType, float aValue)
@@ -55,7 +54,7 @@ public class StatSystem : MonoBehaviour
                 statTypes[i].currentValue = aValue;
                 if (!statFunctionalities.ContainsKey(statType))  // Nothing to do!
                 {
-                    Debug.LogError(statType + "is not in your system!");
+                    Debug.LogError(statType + " has no functionalities");
                     return;
                 }
 
@@ -90,7 +89,7 @@ public class StatSystem : MonoBehaviour
 
                 if(!statFunctionalities.ContainsKey(statType))  // Nothing to do!
                 {
-                    Debug.LogError(statType + "is not in your system!");
+                    Debug.LogError(statType + " has no functionalities");
                     return;
                 }
                 statFunctionalities[statType].Invoke(statType, statTypes[i].currentValue);
